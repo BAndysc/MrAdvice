@@ -264,6 +264,8 @@ namespace ArxOne.MrAdvice.Weaver
             //if (!targetTypeSig.SafeEquivalent(_moduleDefinition.CorLibTypes.Object))
             //    return Emit(OpCodes.Castclass, _moduleDefinition.SafeImport(targetTypeSig));
             //return this;
+            if (targetTypeSig.IsByRef)
+                return this;
             if (MustBox(targetTypeSig))
                 return Emit(OpCodes.Unbox_Any, Module.SafeImport(targetTypeSig));
             if (MustCast(targetTypeSig))
